@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package jaint;
+package jaint.formas;
 
 import java.awt.Graphics;
 
@@ -10,16 +10,14 @@ import java.awt.Graphics;
  *
  * @author r2leyser
  */
-public class Retangulo {
-	private int x1;	
-	private int y1;	
-	private int x2;	
-	private int y2;	
+public abstract class Forma {
+	protected int x1;	
+	protected int y1;	
+	protected int x2;	
+	protected int y2;	
 
 	
-	public void desenhar(Graphics g){
-		g.drawRect(x1, y1, x2 - x1, y2 - y1);
-	}
+	public abstract void desenhar(Graphics g);
 
 	public void setX1(int x1) {
 		this.x1 = x1;

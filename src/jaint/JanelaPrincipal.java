@@ -4,6 +4,11 @@
  */
 package jaint;
 
+import jaint.formas.Elipse;
+import jaint.formas.Retangulo;
+import jaint.formas.Linha;
+import jaint.formas.Forma;
+
 /**
  *
  * @author r2leyser
@@ -12,17 +17,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 	
 	private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JanelaPrincipal.class.getName());
 
-	private Linha linha;
-	private Retangulo retangulo;
+	private Forma forma;
 
 	/**
 	 * Creates new form JanelaPrincipal
 	 */
 	public JanelaPrincipal() {
 		initComponents();
-	}
-	
-
+	} 
 
 	/**
 	 * This method is called from within the constructor to initialize the
@@ -133,30 +135,29 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         private void painelDesenhoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelDesenhoMousePressed
 		if (btnLinha.isSelected()) {
-			linha = new Linha();
-			linha.setX1(evt.getX());
-			linha.setY1(evt.getY());
+			forma = new Linha();
+		} else if (btnRet.isSelected()) {
+			forma = new Retangulo();
+		} else if (btnElipse.isSelected()){
+			forma = new Elipse();
 		}
 		
-		if (btnRetangulo.isSelected()) {
-			retangulo = new Retangulo();
-			retangulo.setX1(evt.getX());
-			retangulo.ssetY1(evt.getY());
-		}
+		forma.setX1(evt.getX());
+		forma.setY1(evt.getY());
         }//GEN-LAST:event_painelDesenhoMousePressed
 
         private void painelDesenhoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelDesenhoMouseReleased
-		linha.setX2(evt.getX());
-		linha.setY2(evt.getY());
-		painelDesenho.addLinha(linha);
-		painelDesenho.setLinhaTemp(null);
+		forma.setX2(evt.getX());
+		forma.setY2(evt.getY());
+		painelDesenho.addForma(forma);
+		painelDesenho.setFormaTemp(null);
 		painelDesenho.repaint();
         }//GEN-LAST:event_painelDesenhoMouseReleased
 
         private void painelDesenhoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelDesenhoMouseDragged
-		linha.setX2(evt.getX());
-		linha.setY2(evt.getY());
-		painelDesenho.setLinhaTemp(linha);
+		forma.setX2(evt.getX());
+		forma.setY2(evt.getY());
+		painelDesenho.setFormaTemp(forma);
 		painelDesenho.repaint();
         }//GEN-LAST:event_painelDesenhoMouseDragged
 
