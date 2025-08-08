@@ -5,6 +5,7 @@
 package jaint;
 
 import jaint.formas.Forma;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +37,18 @@ public class PainelDesenho extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
 
-		if ( formaTemp != null) {
-			formaTemp.desenhar(g); 
-		}
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		
+		g.setColor(Color.BLACK);
+		g.drawRect(0, 0, getWidth(), getHeight());
+
 		for (Forma forma : formas) {
-			forma.desenhar(g);
+			forma.renderizar(g);
+		}
+		
+		if ( formaTemp != null) {
+			formaTemp.renderizar(g); 
 		}
 		
 	}

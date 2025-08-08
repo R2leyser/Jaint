@@ -8,6 +8,9 @@ import jaint.formas.Elipse;
 import jaint.formas.Retangulo;
 import jaint.formas.Linha;
 import jaint.formas.Forma;
+import jaint.formas.Poligono;
+import java.awt.Color;
+import javax.swing.JColorChooser;
 
 /**
  *
@@ -36,11 +39,18 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         private void initComponents() {
 
                 buttonGroup = new javax.swing.ButtonGroup();
+                jMenu1 = new javax.swing.JMenu();
                 painelDesenho = new jaint.PainelDesenho();
                 PainelFormas = new javax.swing.JPanel();
                 btnLinha = new javax.swing.JToggleButton();
+                btnPoligono = new javax.swing.JToggleButton();
                 btnRet = new javax.swing.JToggleButton();
                 btnElipse = new javax.swing.JToggleButton();
+                pnlContorno = new javax.swing.JPanel();
+                pnlPreenchimento = new javax.swing.JPanel();
+                txtPolyInput = new javax.swing.JFormattedTextField();
+
+                jMenu1.setText("jMenu1");
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 setTitle("Jaint");
@@ -67,7 +77,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 );
                 painelDesenhoLayout.setVerticalGroup(
                         painelDesenhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 532, Short.MAX_VALUE)
+                        .addGap(0, 524, Short.MAX_VALUE)
                 );
 
                 PainelFormas.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Formas"));
@@ -81,11 +91,58 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                         }
                 });
 
+                buttonGroup.add(btnPoligono);
+                btnPoligono.setText("Poligono");
+
                 buttonGroup.add(btnRet);
                 btnRet.setText("Retângulo");
 
                 buttonGroup.add(btnElipse);
                 btnElipse.setText("Elipse");
+
+                pnlContorno.setBackground(new java.awt.Color(0, 0, 0));
+                pnlContorno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                pnlContorno.setPreferredSize(new java.awt.Dimension(20, 20));
+                pnlContorno.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                pnlContornoMouseClicked(evt);
+                        }
+                });
+
+                javax.swing.GroupLayout pnlContornoLayout = new javax.swing.GroupLayout(pnlContorno);
+                pnlContorno.setLayout(pnlContornoLayout);
+                pnlContornoLayout.setHorizontalGroup(
+                        pnlContornoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 20, Short.MAX_VALUE)
+                );
+                pnlContornoLayout.setVerticalGroup(
+                        pnlContornoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 20, Short.MAX_VALUE)
+                );
+
+                pnlPreenchimento.setBackground(new java.awt.Color(0, 0, 0));
+                pnlPreenchimento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                pnlPreenchimento.setPreferredSize(new java.awt.Dimension(20, 20));
+                pnlPreenchimento.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                pnlPreenchimentoMouseClicked(evt);
+                        }
+                });
+
+                javax.swing.GroupLayout pnlPreenchimentoLayout = new javax.swing.GroupLayout(pnlPreenchimento);
+                pnlPreenchimento.setLayout(pnlPreenchimentoLayout);
+                pnlPreenchimentoLayout.setHorizontalGroup(
+                        pnlPreenchimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 20, Short.MAX_VALUE)
+                );
+                pnlPreenchimentoLayout.setVerticalGroup(
+                        pnlPreenchimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 20, Short.MAX_VALUE)
+                );
+
+                txtPolyInput.setText("5");
+                txtPolyInput.setMinimumSize(new java.awt.Dimension(200, 24));
+                txtPolyInput.setPreferredSize(new java.awt.Dimension(200, 24));
 
                 javax.swing.GroupLayout PainelFormasLayout = new javax.swing.GroupLayout(PainelFormas);
                 PainelFormas.setLayout(PainelFormasLayout);
@@ -98,14 +155,26 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                                 .addComponent(btnRet)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnElipse)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPoligono)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pnlContorno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pnlPreenchimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtPolyInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
                 );
                 PainelFormasLayout.setVerticalGroup(
-                        PainelFormasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(PainelFormasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        PainelFormasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(PainelFormasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                                 .addComponent(btnLinha)
                                 .addComponent(btnRet)
-                                .addComponent(btnElipse))
+                                .addComponent(btnElipse)
+                                .addComponent(pnlContorno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnlPreenchimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnPoligono)
+                                .addComponent(txtPolyInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 );
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,8 +209,15 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 			forma = new Retangulo();
 		} else if (btnElipse.isSelected()){
 			forma = new Elipse();
+		} else if (btnPoligono.isSelected()){
+			forma = new Poligono(
+				Integer.parseInt(txtPolyInput.getText())
+			);
+
 		}
 		
+		forma.setContorno(pnlContorno.getBackground());
+		forma.setPreenchimento(pnlPreenchimento.getBackground());
 		forma.setX1(evt.getX());
 		forma.setY1(evt.getY());
         }//GEN-LAST:event_painelDesenhoMousePressed
@@ -155,6 +231,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         }//GEN-LAST:event_painelDesenhoMouseReleased
 
         private void painelDesenhoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelDesenhoMouseDragged
+		forma.setContorno(pnlContorno.getBackground());
 		forma.setX2(evt.getX());
 		forma.setY2(evt.getY());
 		painelDesenho.setFormaTemp(forma);
@@ -164,6 +241,22 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         private void btnLinhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinhaActionPerformed
                 // TODO add your handling code here:
         }//GEN-LAST:event_btnLinhaActionPerformed
+
+        private void pnlContornoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlContornoMouseClicked
+                Color c = JColorChooser.showDialog(this, "Cor do Contorno", pnlContorno.getBackground());
+		
+		if ( c != null) {
+			pnlContorno.setBackground(c);
+		}
+        }//GEN-LAST:event_pnlContornoMouseClicked
+
+        private void pnlPreenchimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlPreenchimentoMouseClicked
+                Color c = JColorChooser.showDialog(this, "Cor do Preenchimento", pnlContorno.getBackground());
+		
+		if ( c != null) {
+			pnlPreenchimento.setBackground(c);
+		}
+        }//GEN-LAST:event_pnlPreenchimentoMouseClicked
 
 	public static void main(String[] args) {
 		JanelaPrincipal janela = new JanelaPrincipal();
@@ -175,8 +268,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         private javax.swing.JPanel PainelFormas;
         private javax.swing.JToggleButton btnElipse;
         private javax.swing.JToggleButton btnLinha;
+        private javax.swing.JToggleButton btnPoligono;
         private javax.swing.JToggleButton btnRet;
         private javax.swing.ButtonGroup buttonGroup;
+        private javax.swing.JMenu jMenu1;
         private jaint.PainelDesenho painelDesenho;
+        private javax.swing.JPanel pnlContorno;
+        private javax.swing.JPanel pnlPreenchimento;
+        private javax.swing.JFormattedTextField txtPolyInput;
         // End of variables declaration//GEN-END:variables
 }
