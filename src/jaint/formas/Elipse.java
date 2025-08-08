@@ -10,11 +10,17 @@ import java.awt.Graphics;
  *
  * @author r2leyser
  */
-public class Linha extends Forma {
-
-	@Override
+public class Elipse extends Forma {
 	public void desenhar(Graphics g){
+		int x1d = x1 < x2 ? x1 : x2;
+		int y1d = y1 < y2 ? y1 : y2;
+
+		int x2d = x2 < x1 ? x1 : x2;
+		int y2d = y2 < y1 ? y1 : y2;
+
+		g.setColor(preenchimento);
+		g.fillOval(x1d, y1d, x2d-x1d, y2d-y1d);
 		g.setColor(contorno);
-		g.drawLine(x1, y1, x2, y2);
-	} 
+		g.drawOval(x1d, y1d, x2d-x1d, y2d-y1d);
+	}
 }

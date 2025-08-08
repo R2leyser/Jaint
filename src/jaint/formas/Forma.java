@@ -4,6 +4,7 @@
  */
 package jaint.formas;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -16,7 +17,22 @@ public abstract class Forma {
 	protected int x2;	
 	protected int y2;	
 
+	protected Color contorno; 
+	protected Color preenchimento;
 	
+	public Forma() {
+		this.contorno = Color.BLACK;
+		this.preenchimento = Color.WHITE;
+	}
+	
+	public void renderizar(Graphics g){
+		g = g.create();
+
+		this.desenhar(g);
+
+		g.dispose();
+	}
+
 	public abstract void desenhar(Graphics g);
 
 	public void setX1(int x1) {
@@ -35,4 +51,11 @@ public abstract class Forma {
 		this.y2 = y2;
 	}
 	
+	public void setContorno(Color contorno) {
+		this.contorno = contorno;
+	}
+
+	public void setPreenchimento(Color preenchimento) {
+		this.preenchimento = preenchimento;
+	}
 }
