@@ -35,9 +35,9 @@ public class Poligono extends Forma {
 		}
 
 		g.setColor(preenchimento);
-		g.drawPolygon(poligono.xpoints, poligono.ypoints, poligono.npoints);
+		g.fillPolygon(poligono);
 		g.setColor(contorno);
-		g.drawPolyline(poligono.xpoints, poligono.ypoints, poligono.npoints);
+		g.drawPolygon(poligono);
 
 	} 
 
