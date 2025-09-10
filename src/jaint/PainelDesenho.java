@@ -15,22 +15,51 @@ import javax.swing.JPanel;
  *
  * @author r2leyser
  */
-public class PainelDesenho extends JPanel {
+public class PainelDesenho extends JPanel implements KeysListener {
 
 	private Forma formaTemp;
-	private List<Forma> formas;
+	private Stack<Forma> formas;
+	private Stack<Forma> redoFormas;
 
 	public void setFormaTemp(Forma formaTemp) {
 		this.formaTemp = formaTemp;
 	}
 
 	public void addForma( Forma forma ){
-		formas.add(forma); 
+		formas.push(forma); 
 	}
 	
+    public void undo() {
+        if (!formas.isEmpty()) {
+            refazerFormas.push(formas.pop());
+        }
+    }
+
+    public void redo() {
+        if (!refazerFormas.isEmpty()) {
+            formas.push(refazerFormas.pop());
+        }
+    }
+
 	public PainelDesenho() {
-		formas = new ArrayList<>();
+		formas = new Stack<>();
+        redoFormas = new Stack<>();
+
+        setBackground(Color.WHITE);
+        this.addKeyListener( new KeysHandler(this) );
+        setFocusable(true);
 	}
+
+    @Override
+    public void keyPressed(int keyCode) {
+        if ( keyCode == KeysHandler.CTRL_Z ) {
+            undo();
+            repaint();
+        } else if ( keyCode == KeysHandler.CTRL_Y ) {
+            redo();
+            repaint();
+        }
+    }
 
 
 	@Override
