@@ -72,7 +72,7 @@ public class PainelDesenho extends JPanel implements KeysListener {
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, getWidth(), getHeight());
 
-		for (Forma forma : formas) {
+		for (Forma forma : formas.iterator() ) {
 			forma.renderizar(g);
 		}
 		
